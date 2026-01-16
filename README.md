@@ -21,3 +21,56 @@ An intelligent match notification system designed specifically for **FC Barcelon
    ```bash
    git clone [https://gitlab.com/your-username/football-alert-ai.git](https://gitlab.com/your-username/football-alert-ai.git)
    cd football-alert-ai
+
+2. **Install dependencies:**:
+    ```bash
+    pip install -r requirements.txt
+3. **onfigure environment variables: Create a .env file in the root directory:**:
+   ```bash
+   GEMINI_API_KEY=your_google_ai_studio_key
+   FOOTBALL_API_KEY=your_rapidapi_key
+   DISCORD_WEBHOOK_URL=your_discord_webhook_url
+
+## 🚀 Usage
+
+### Simulation Mode (Test AI & Notifications)
+
+Run the simulator to verify AI generation and notification delivery without waiting for a live match:
+
+```bash
+python3 simulator.py
+```
+
+### Production Mode
+
+Run the main bot to start tracking live matches:
+
+```bash
+python3 src/main.py
+```
+
+---
+
+## 🏗️ Project Architecture
+
+The project is designed with a modular approach:
+
+- src/brain.py  
+  Handles AI logic using the modern google-genai SDK.
+
+- src/notification.py  
+  Independent module for system and external notifications.
+
+- src/football_api.py  
+  Integration with live match data in JSON format.
+
+---
+
+Created by Maksymilian Gędłek - 2026
+
+
+
+
+   ```bash
+   git clone [https://gitlab.com/your-username/football-alert-ai.git](https://gitlab.com/your-username/football-alert-ai.git)
+   cd football-alert-ai
