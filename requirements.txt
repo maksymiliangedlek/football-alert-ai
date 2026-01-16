@@ -1,0 +1,8 @@
+# Kluczowa biblioteka do obsługi AI
+google-genai==1.59.0
+
+# Obsługa zapytań do API piłkarskiego i Discorda
+requests==2.32.5
+
+# Zarządzanie kluczami w pliku .env
+python-dotenv==1.1.1
