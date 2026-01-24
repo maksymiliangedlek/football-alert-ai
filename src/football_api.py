@@ -4,17 +4,36 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-def get_live_match(team_id):
-    url = "https://api-football-v1.p.rapidapi.com/v3/fixtures"
-    headers = {
-        "X-RapidAPI-Key": os.getenv("FOOTBALL_API_KEY"),
-        "X-RapidAPI-Host": "api-football-v1.p.rapidapi.com"
+BASE_URL = "https://v3.football.api-sports.io"
+HEADERS = {"x-apisports-key": os.getenv("FOOTBALL_API_KEY")}
+
+
+def get_live_match_data(team_id):
+    url = f"{BASE_URL}/fixtures"
+    params = {
+        "team": team_id,
+        "live": "all"
     }
-    params = {"team": team_id, "live": "all"}
-    
-    response = requests.get(url, headers=headers, params=params)
+
+    try:
+        response = requests.get(url, headers=HEADERS, params=params, timeout=10)
+        data = response.json()
+
+        if data.get("response"):
+            return data["response"][0]
+        else:
+            return None
+
+    except Exception as e:
+        print(f"Błąd API: {e}")
+        return None
+
+
+def get_match_events(fixture_id):
+    url = f"{BASE_URL}/fixtures/events"
+    params = {"fixture": fixture_id}
+
+    response = requests.get(url, headers=HEADERS, params=params, timeout=10)
     data = response.json()
-    
-    if data['response']:
-        return data['response'][0] 
-    return None
+
+    return data.get("response", [])
