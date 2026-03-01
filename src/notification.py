@@ -24,4 +24,6 @@ def send_all_notifications(title, message, score, subtitle):
                 "fields": [{"name": "Current score", "value": f"**{score}**"}]
             }]
         }
-        requests.post(webhook_url, json=payload)
+        resp = requests.post(webhook_url, json=payload)
+        if not resp.ok:
+            print(f"Discord notification error: {resp.status_code} {resp.text}")

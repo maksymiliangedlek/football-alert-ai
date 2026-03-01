@@ -7,6 +7,8 @@ load_dotenv(os.path.join(os.path.dirname(__file__), "..", ".env"))
 
 def get_team_id(team_name):
     team_dict = {"FC BARCELONA": 529, "REAL MADRID": 541, "BAYERN MONACHIUM": 157,"Atletico Madrid":530}
+    if team_name not in team_dict:
+        raise ValueError(f"Unknown team: {team_name}. Add it to team_dict first.")
     return team_dict[team_name]
 
 

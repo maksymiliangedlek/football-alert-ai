@@ -33,7 +33,11 @@ def get_match_events(fixture_id):
     url = f"{BASE_URL}/fixtures/events"
     params = {"fixture": fixture_id}
 
-    response = requests.get(url, headers=HEADERS, params=params, timeout=10)
-    data = response.json()
-
-    return data.get("response", [])
+    try:
+        response = requests.get(url, headers=HEADERS, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json()
+        return data.get("response", [])
+    except Exception as e:
+        print(f"API Error (events): {e}")
+        return []
