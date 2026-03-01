@@ -11,9 +11,9 @@ def send_all_notifications(title, message, score, subtitle):
     try:
         subprocess.run(["osascript", "-e", apple_script], check=True)
     except Exception as e:
-        print(f"Błąd powiadomienia macOS: {e}")
+        print(f"macOS notification error: {e}")
 
-    #DISCORD
+    # DISCORD
     webhook_url = os.getenv("DISCORD_WEBHOOK_URL")
     if webhook_url:
         payload = {
@@ -21,7 +21,7 @@ def send_all_notifications(title, message, score, subtitle):
                 "title": title,
                 "description": message,
                 "color": 15158332,
-                "fields": [{"name": "Aktualny wynik", "value": f"**{score}**"}]
+                "fields": [{"name": "Current score", "value": f"**{score}**"}]
             }]
         }
         requests.post(webhook_url, json=payload)

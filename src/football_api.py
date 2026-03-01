@@ -25,7 +25,7 @@ def get_live_match_data(team_id):
             return None
 
     except Exception as e:
-        print(f"Błąd API: {e}")
+        print(f"API Error: {e}")
         return None
 
 

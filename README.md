@@ -1,6 +1,13 @@
-# ⚽ Football Alert AI — Barça Edition
+# ⚽ Football Alert AI 
 
-An intelligent match notification system designed specifically for **FC Barcelona** fans. This system monitors live matches in real-time and generates unique, emotional, and sarcastic commentary using Artificial Intelligence.
+An intelligent match notification that monitors live matches in real-time and generates unique, emotional, and sarcastic commentary using Artificial Intelligence.
+
+
+## Demo
+
+![App demo](data/demo.png)
+
+*Example of a real-time Discord notification featuring AI-generated sarcastic commentary.*
 
 ## 🌟 Key Features
 * **Live Match Tracking**: Real-time monitoring of matches via API-Football (RapidAPI).
@@ -9,45 +16,58 @@ An intelligent match notification system designed specifically for **FC Barcelon
     * **macOS**: Native system notifications delivered directly to your desktop.
     * **Discord**: Rich Embed notifications sent to a dedicated server channel.
 
-## 🛠️ Tech Stack (2026 Standard)
+## 🛠️ Tech Stack
 * **Language**: Python 3.13+
-* **AI SDK**: `google-genai` (Version 1.59.0+) — This project utilizes the newest Google library, as support for the legacy `google-generativeai` package ended in early 2026.
-* **AI Infrastructure**: Powered by the `Client` class, providing modern and secure authentication with the Gemini API.
+* **AI SDK**: `google-genai` 
 * **Communication**: `requests` (API-Football, Discord Webhooks).
 
 ## 📋 Requirements & Installation
 
 1. **Clone the repository**:
-   ```bash
-   git clone [https://gitlab.com/your-username/football-alert-ai.git](https://gitlab.com/your-username/football-alert-ai.git)
-   cd football-alert-ai
+```bash
+git clone [https://github.com/maksymilian-gedlek/football-alert-ai.git](https://github.com/maksymilian-gedlek/football-alert-ai.git)
+cd football-alert-ai
+```
 
-2. **Install dependencies:**:
-    ```bash
-    pip install -r requirements.txt
-3. **onfigure environment variables: Create a .env file in the root directory:**:
-   ```bash
-   GEMINI_API_KEY=your_google_ai_studio_key
-   FOOTBALL_API_KEY=your_rapidapi_key
-   DISCORD_WEBHOOK_URL=your_discord_webhook_url
+2. **Install dependencies**:
+```bash
+pip install -r requirements.txt
+```
+
+3. **Configure environment variables**: 
+Create a `.env` file in the root directory:
+```env
+GEMINI_API_KEY=your_google_ai_studio_key
+FOOTBALL_API_KEY=your_rapidapi_key
+DISCORD_WEBHOOK_URL=your_discord_webhook_url
+```
 
 ## 🚀 Usage
 
+The application operates entirely through the console, ensuring maximum stability on macOS.
+
 ### Simulation Mode (Test AI & Notifications)
-
-Run the simulator to verify AI generation and notification delivery without waiting for a live match:
-
+To verify AI generation and notification delivery without consuming your API limits, open `main.py` and ensure the mock flag is enabled:
+```python
+MOCK_MODE = True
+```
+Then run the bot:
 ```bash
-python3 simulator.py
+python main.py
 ```
 
-### Production Mode
-
-Run the main bot to start tracking live matches:
-
-```bash
-python3 src/main.py
+### Production Mode (Live Tracking)
+When your API account is active and a match is live, disable the mock mode in `main.py`:
+```python
+MOCK_MODE = False
 ```
+Then start the live tracker:
+```bash
+python main.py
+```
+### Configuration
+You can easily change the team that you're following by changing TEAM_NAME, TEAM_ID in  `src/main.py` for example:
+REAL MADRID: 541, BAYERN MONACHIUM: 157,ATLETICO MADRID: 530
 
 ---
 
@@ -55,22 +75,13 @@ python3 src/main.py
 
 The project is designed with a modular approach:
 
-- src/brain.py  
-  Handles AI logic using the modern google-genai SDK.
-
-- src/notification.py  
-  Independent module for system and external notifications.
-
-- src/football_api.py  
-  Integration with live match data in JSON format.
+* `main.py` - The core loop orchestrating data fetching, AI processing, and notifications.
+* `brain.py` - Handles AI logic and prompt generation using the modern `google-genai` SDK.
+* `notification.py` - Independent module for macOS system alerts and Discord webhooks.
+* `football_api.py` - Integration with live match data and event parsing in JSON format.
+* `find_team_id.py` - Utility for fetching API-specific team IDs.
 
 ---
+## License
 
-Created by Maksymilian Gędłek - 2026
-
-
-
-
-   ```bash
-   git clone [https://gitlab.com/your-username/football-alert-ai.git](https://gitlab.com/your-username/football-alert-ai.git)
-   cd football-alert-ai
+Distributed under the MIT License. See `LICENSE` for more information.

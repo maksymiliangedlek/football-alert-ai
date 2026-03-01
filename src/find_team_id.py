@@ -26,6 +26,6 @@ def get_team_info(team_name):
         if data["response"]:
             team_id = data["response"][0]["team"]["id"]
             return team_id
-        return "Nie znaleziono drużyny."
+        return "Team not found."
     except Exception as e:
-        return f"Błąd: {e}"
+        return f"Error: {e}"
